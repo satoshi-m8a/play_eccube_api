@@ -1,0 +1,29 @@
+<header class="navbar navbar-inverse navbar-fixed-top basics-nav"
+        ng-cloak>
+    <div class="container" ng-switch="!!user" ng-cloak>
+        <a href="#/" class="navbar-brand">Play-EC Demo</a>
+        <div ng-switch-when="true">
+            <ul class="nav navbar-nav navbar-right">
+                <li class="dropdown">
+                    <a href="" class="dropdown-toggle" data-toggle="dropdown">
+                        <span class="glyphicon glyphicon-user"></span> {{user.name}}
+                        <b class="caret"></b>
+                    </a>
+                    <ul class="dropdown-menu">
+                        <li><a href="#/settings"><span class="glyphicon glyphicon-cog"></span> Settings</a></li>
+                        <li>
+                            <a href="" ng-click="logout()">
+                                <span class="glyphicon glyphicon-off"></span> Logout
+                            </a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+        </div>
+        <div ng-switch-when="false">
+            <ul class="nav navbar-nav pull-right">
+                <li><a href="#/login"><span class="glyphicon glyphicon-cog"></span> Login</a></li>
+            </ul>
+        </div>
+    </div>
+</header>

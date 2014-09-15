@@ -1,7 +1,12 @@
 @(message: String)
-
-@main("Welcome to Play") {
-
-    @play20.welcome(message)
-
+@main("Welcome to EC-CUBE") {
+    @*-- Header -- *@
+    <ec3-header></ec3-header>
+    @* -- Main Content -- *@
+    <div class="container" ng-cloak>
+        <div ng-view></div>
+    </div>
+    @*-- Footer -- *@
+    <footer ng-controller="FooterCtrl">
+    </footer>
 }

@@ -1,0 +1,26 @@
+<h1>Welcome to Play-EC
+    <small>play-angular</small>
+</h1>
+<p>
+    <a href="http://www.webjars.org">WebJars</a>,
+    <a href="http://www.requirejs.org">RequireJS</a> and
+    <a href="http://www.angularjs.org">AngularJS</a>.
+</p>
+
+<ec3-block block-name="myblock"></ec3-block>
+
+<div ng-repeat="product in products">
+    <ec3-product ng-model="product"></ec3-product>
+</div>
+
+
+<p>
+    When you are done developing, run <code>sbt dist</code> on the console to get an optimized,
+    production-ready app. To try out production mode, execute <code>sbt start</code>.
+</p>
+<p>Enjoy!</p>
+<hr/>
+<div>
+    Attached to this div is a directive that prints to the console. Check out the JavaScript console.
+    TopView
+</div>
