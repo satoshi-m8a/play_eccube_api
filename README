@@ -1,4 +1,7 @@
-This is your new Play application
-=================================
+EC-CUBEのDBにアクセスできる、APIサーバーをPlayFramework2(Scala)を使って作っています。
 
-This file will be packaged with your application, when using `activator dist`.
+EC-CUBEのDBを使いまわすことによって、既存のデータを無駄にすることなくAPIサーバーを構築することが
+可能です。
+
+JSONを返すAPIに特化することで既存のフレームワーク(AngularJS等)やスマホアプリとの連携が容易になります。
+
