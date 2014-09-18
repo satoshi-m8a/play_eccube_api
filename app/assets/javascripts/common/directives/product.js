@@ -6,7 +6,10 @@ define(['angular'], function (angular) {
             return {
                 restrict: 'E',
                 require: 'ngModel',
-                templateUrl: '/blocks/product.html',
+                templateUrl: function (el, attr) {
+                    var blockName = attr.blockName || 'product';
+                    return '/blocks/' + blockName + '.html';
+                },
                 link: function (/*scope, el, attrs*/) {
                     $log.info('load product directive');
                 }

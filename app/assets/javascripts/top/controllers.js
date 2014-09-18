@@ -4,16 +4,12 @@ define([], function () {
     var HomeCtrl = function ($scope, $rootScope, $location, Products) {
         $rootScope.pageTitle = 'Welcome';
         $scope.products = Products.query();
+        $rootScope.hasHeader = true;
+        $rootScope.hasFooter = true;
     };
     HomeCtrl.$inject = ['$scope', '$rootScope', '$location', 'Product'];
 
-    /** Controls the footer */
-    var FooterCtrl = function (/*$scope*/) {
-    };
-    //FooterCtrl.$inject = ['$scope'];
-
     return {
-        FooterCtrl: FooterCtrl,
         HomeCtrl: HomeCtrl
     };
 

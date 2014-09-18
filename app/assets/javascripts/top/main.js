@@ -1,6 +1,5 @@
-define(['angular', './routes', './controllers'], function (angular, routes, controllers) {
+define(['angular', './routes', './controllers'], function (angular, routes) {
     'use strict';
 
-    return angular.module('ec3.top', ['ngRoute', 'top.routes', 'common.resources.products'])
-        .controller('FooterCtrl', controllers.FooterCtrl);
+    return angular.module('ec3.top', ['ngRoute', 'top.routes', 'common.resources.products']);
 });

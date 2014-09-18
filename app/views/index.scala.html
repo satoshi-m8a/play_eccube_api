@@ -1,12 +1,10 @@
-@(message: String)
+@()
 @main("Welcome to EC-CUBE") {
     @*-- Header -- *@
-    <ec3-header></ec3-header>
+    <ec3-header ng-if="hasHeader"></ec3-header>
     @* -- Main Content -- *@
-    <div class="container" ng-cloak>
-        <div ng-view></div>
-    </div>
+    <div class="container" ng-if="!errorTemplateUrl" ng-view ng-cloak></div>
+    <div ng-if="errorTemplateUrl" ng-include="errorTemplateUrl"></div>
     @*-- Footer -- *@
-    <footer ng-controller="FooterCtrl">
-    </footer>
+    <ec3-footer ng-if="hasFooter"></ec3-footer>
 }
