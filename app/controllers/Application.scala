@@ -12,8 +12,4 @@ object Application extends Controller {
     Ok(views.html.index())
   }
 
-  def adminIndex = Action {
-    Ok("index")
-  }
-
 }

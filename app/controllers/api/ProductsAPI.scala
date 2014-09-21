@@ -1,6 +1,6 @@
 package controllers.api
 
-import models.Product
+import models.{Image, Product}
 import play.api.libs.json.{Json, Writes}
 import play.api.mvc._
 
@@ -17,7 +17,7 @@ trait ProductsAPI extends Pagination {
         "id" -> product.id,
         "name" -> product.name,
         "mainComment" -> product.mainComment,
-        "mainImage" -> product.mainImage
+        "mainImage" -> Image(product.mainImage)
       )
     }
   }

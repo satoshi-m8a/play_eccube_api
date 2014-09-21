@@ -5,7 +5,7 @@ define(['angular', './controllers', 'common/main'], function (angular, controlle
         .config(['$routeProvider', function ($routeProvider) {
             $routeProvider
                 .when('/products', {
-                    templateUrl: '/pages/products.html',
+                    templateUrl: '/pages/products/list.html',
                     controller: controllers.ProductListCtrl,
                     resolve: {
                         products: ['Product', function (Products) {
@@ -14,7 +14,7 @@ define(['angular', './controllers', 'common/main'], function (angular, controlle
                     }
                 })
                 .when('/products/:productId', {
-                    templateUrl: '/pages/product_detail.html',
+                    templateUrl: '/pages/products/detail.html',
                     controller: controllers.DetailCtrl,
                     resolve: {
                         product: ['$route', 'Product', function ($route, Products) {

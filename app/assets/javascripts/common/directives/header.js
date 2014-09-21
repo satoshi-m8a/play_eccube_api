@@ -5,6 +5,7 @@ define(['angular'], function (angular) {
         .directive('ec3Header', ['$log', function ($log) {
             return {
                 restrict: 'E',
+                replace: true,
                 templateUrl: '/blocks/header.html',
                 link: function (/*scope, el, attrs*/) {
                     $log.info('load header directive');

@@ -1,0 +1,10 @@
+@()
+@main("EC-CUBE Admin") {
+    @*-- Header -- *@
+    <ec3-admin-header ng-if="hasHeader"></ec3-admin-header>
+    @* -- Main Content -- *@
+    <div class="container-fluid" ng-if="!errorTemplateUrl" ng-view></div>
+    <div ng-if="errorTemplateUrl" ng-include="errorTemplateUrl"></div>
+    @*-- Footer -- *@
+    <ec3-admin-footer ng-if="hasFooter"></ec3-admin-footer>
+}

@@ -4,9 +4,11 @@ define(['angular',
         './directives/block',
         './directives/product',
         './directives/includeReplace',
+        './directives/carousel',
         './resources/products',
         './resources/pages',
-        './services/pages'
+        './services/pages',
+        './services/auth'
     ],
     function (angular) {
         'use strict';
@@ -16,9 +18,11 @@ define(['angular',
             'common.directives.block',
             'common.directives.product',
             'common.directives.includeReplace',
+            'common.directives.carousel',
             'common.resources.products',
             'common.resources.pages',
-            'common.services.pages'
+            'common.services.pages',
+            'common.services.auth'
         ]);
     }
 );

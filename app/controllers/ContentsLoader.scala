@@ -8,11 +8,15 @@ import play.api.libs.iteratee.Enumerator
 import scala.concurrent.ExecutionContext.Implicits.global
 import scala.io.Source
 
-trait ContentsLoader {
+trait ContentsPath {
   lazy val contentsDir = Play.current.configuration.getString("ec3.contents.dir").get
 
-  val blockDirName = "blocks"
-  val pageDirName = "pages"
+  protected val blockDirName = "blocks"
+  protected val pageDirName = "pages"
+  protected val imageDirName = "images"
+}
+
+trait ContentsLoader extends ContentsPath {
 
   def loadBlock(file: String): Option[Enumerator[Array[Byte]]] = {
     loadFile(Paths.get(contentsDir, blockDirName, file).toFile)
@@ -22,8 +26,8 @@ trait ContentsLoader {
     loadFile(Paths.get(contentsDir, pageDirName, file).toFile)
   }
 
-  def loadTemplateFile(file: String): String = {
-    Source.fromFile(file).getLines().mkString
+  def loadImage(file: String): Option[Enumerator[Array[Byte]]] = {
+    loadFile(Paths.get(contentsDir, imageDirName, file).toFile)
   }
 
   private def loadFile(file: File): Option[Enumerator[Array[Byte]]] = {

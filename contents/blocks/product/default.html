@@ -1,7 +1,7 @@
 <div>
     <a href="/products/{{product.id}}">
         <h2>{{product.name}}</h2>
-        <img ng-src="http://localhost:7000//upload/save_image/{{product.mainImage}}"/>
+        <img ng-src="{{product.mainImage.url}}"/>
 
         <p>{{product.mainComment}}</p>
     </a>

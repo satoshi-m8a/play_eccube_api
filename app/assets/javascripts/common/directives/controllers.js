@@ -1,9 +1,11 @@
 define([], function () {
     'use strict';
 
-    var BlockCtrl = function ($scope, $rootScope) {
+    var BlockCtrl = function ($scope, $element, $attrs) {
+
+
     };
-    BlockCtrl.$inject = ['$scope', '$rootScope', '$location'];
+    BlockCtrl.$inject = ['$scope', '$element', '$attrs'];
 
     return {
         BlockCtrl: BlockCtrl

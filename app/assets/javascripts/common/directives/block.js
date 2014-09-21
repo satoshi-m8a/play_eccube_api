@@ -5,12 +5,15 @@ define(['angular', './controllers'], function (angular, controllers) {
         .directive('ec3Block', ['$log', function ($log) {
             return {
                 restrict: 'E',
-                controller: controllers.BlockCtrl,
+                replace: true,
+                controller: ['$scope', '$element', '$attrs', function ($scope, $element, $attrs) {
+                }],
                 templateUrl: function (el, attr) {
                     return '/blocks/' + attr.blockName + '.html';
                 },
-                link: function (/*scope, el, attrs*/) {
+                link: function (/*scope, element, attrs, controller, trancludeFn*/) {
                     $log.info('load block directive');
+
                 }
             };
         }]);
