@@ -8,7 +8,11 @@ import play.api.Play.current
 
 import scala.util.control.Exception._
 
-case class Category(id: Long, name: String, parentCategoryId: Long)
+case class Category(id: Long, name: String, parentCategoryId: Long) {
+  def findChildren(list: Seq[Category]): Seq[Category] = {
+    list.filter(_.parentCategoryId == id)
+  }
+}
 
 object Category {
   val parser: RowParser[Category] = {
@@ -54,9 +58,27 @@ trait CategoryRepositoryComponent {
 trait CategoryServiceComponent {
   this: CategoryRepositoryComponent =>
 
+  case class CategoryNode(category: Category, children: Seq[CategoryNode])
+
   class CategoryService {
     def findAll: Seq[Category] = {
       categoryRepository.findAll
+    }
+
+    def tree: Seq[CategoryNode] = {
+
+      val all = categoryRepository.findAll
+
+      def buildTree(categories: Seq[Category]): Seq[CategoryNode] = {
+        categories.headOption match {
+          case Some(category) => {
+            buildTree(categories.tail) :+ CategoryNode(category, buildTree(category.findChildren(all)))
+          }
+          case _ => Seq.empty[CategoryNode]
+        }
+      }
+
+      buildTree(all.filter(_.parentCategoryId == 0))
     }
 
     def findById(id: String): Option[Category] = {

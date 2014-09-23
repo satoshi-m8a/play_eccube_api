@@ -1,14 +1,21 @@
 <div class="row">
     <div class="col-md-4"></div>
     <div class="col-md-4">
-        <form class="form-signin" role="form">
+        <form class="form-signin" role="form" ng-submit="login()">
             <h2 class="form-signin-heading">Please sign in</h2>
-            <input type="email" class="form-control" placeholder="Email address" required autofocus>
-            <input type="password" class="form-control" placeholder="Password" required>
+
+            <div class="has-error" ng-if="error">
+                <label class="text-danger">
+                       Login Fail
+                </label>
+            </div>
+
+            <input type="text" class="form-control" placeholder="Login ID" ng-model="loginId" required autofocus>
+            <input type="password" class="form-control" placeholder="Password" ng-model="password" focus-on="onError" required>
             <label class="checkbox">
                 <input type="checkbox" value="remember-me"> Remember me
             </label>
-            <button class="btn btn-lg btn-primary btn-block" type="submit">Sign in</button>
+            <button class="btn btn-lg btn-primary btn-block" type="submit" ng-disabled="disabled">Sign in</button>
         </form>
     </div>
     <div class="col-md-4"></div>

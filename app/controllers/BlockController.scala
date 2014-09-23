@@ -1,5 +1,6 @@
 package controllers
 
+import controllers.admin.AdminBlockController._
 import play.api.mvc.{ResponseHeader, Result, Action, Controller}
 
 object BlockController extends Controller with ContentsLoader {
@@ -14,4 +15,12 @@ object BlockController extends Controller with ContentsLoader {
     } getOrElse Ok("")
   }
 
+
+  def categoryDefault = Action {
+    Ok(views.html.common.blocks.category.default())
+  }
+
+  def treeItem = Action {
+    Ok(views.html.common.blocks.category.tree_item())
+  }
 }

@@ -19,10 +19,27 @@ trait CategoriesAPI {
     }
   }
 
+  implicit object CategoryNodeJsonFormat extends Writes[CategoryNode] {
+    def writes(categoryNode: CategoryNode) = {
+      Json.obj(
+        "id" -> categoryNode.category.id,
+        "name" -> categoryNode.category.name,
+        "parentCategoryId" -> categoryNode.category.parentCategoryId,
+        "children" -> Json.toJson(categoryNode.children)
+      )
+    }
+  }
+
   def index = Action {
     val categories = Categories.findAll
+
     Ok(Json.toJson(categories))
   }
+
+  def tree = Action {
+    Ok(Json.toJson(Categories.tree))
+  }
+
 
   def show(id: String) = Action {
     request =>

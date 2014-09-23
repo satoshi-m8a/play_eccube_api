@@ -6,7 +6,9 @@ ProductRepositoryComponent with
 CategoryServiceComponent with
 CategoryRepositoryComponent with
 PageServiceComponent with
-PageRepositoryComponent {
+PageRepositoryComponent with
+MemberServiceComponent with
+MemberRepositoryComponent {
 
   val productRepository = new ProductRepository
   val Products = new ProductService
@@ -16,4 +18,7 @@ PageRepositoryComponent {
 
   val pageRepository = new PageRepository
   val Pages = new PageService
+
+  val memberRepository = new MemberRepository
+  val Members = new MemberService
 }

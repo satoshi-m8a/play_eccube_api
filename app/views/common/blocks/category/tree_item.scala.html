@@ -1,0 +1,5 @@
+<li>
+    <div ng-class="{active:category.selected}" data-category-id="{{category.id}}" ng-click="selectCategoryItem(category)">
+        <span class="glyphicon" ng-class="{'glyphicon-folder-open':category.selected,'glyphicon-folder-close':!category.selected}"></span> {{category.name}}
+    </div>
+</li>

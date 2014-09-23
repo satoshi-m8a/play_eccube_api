@@ -16,4 +16,8 @@ object AdminBlockController extends Controller {
     Ok(views.html.admin.blocks.product.list())
   }
 
+  def tableItem = Action {
+    Ok(views.html.admin.blocks.product.table_item())
+  }
+
 }

@@ -1,12 +1,12 @@
-define(['angular', './admin/dashboard/main', './admin/login/main', './admin/products/main'], function (angular) {
+define(['angular', './admin/dashboard/main', './admin/login/main', './admin/products/main', './admin/services/main'], function (angular) {
     'use strict';
 
-    return angular.module('ec3', ['ec3.admin.dashboard', 'ec3.admin.login', 'ec3.admin.products'])
+    return angular.module('ec3', ['ec3.admin.dashboard', 'ec3.admin.login', 'ec3.admin.products', 'ec3.admin.services'])
         .config(['$locationProvider', '$routeProvider', function ($locationProvider, $routeProvider) {
             $locationProvider.html5Mode(true);
             $routeProvider.otherwise({ templateUrl: '/pages/404.html' });
         }])
-        .run(['$rootScope', '$location', 'AuthService', function ($rootScope, $location, AuthService) {
+        .run(['$rootScope', '$location', 'AdminAuthService', function ($rootScope, $location, AdminAuthService) {
             $rootScope.$on('$routeChangeStart', function (event, next) {
                 if (next.originalPath === '/admin/login') {
                     $rootScope.hasHeader = false;
@@ -16,9 +16,14 @@ define(['angular', './admin/dashboard/main', './admin/login/main', './admin/prod
                     $rootScope.hasFooter = true;
                 }
 
-                if (!AuthService.isLoggedIn() && next.originalPath !== '/admin/login') {
+                if (!AdminAuthService.isLoggedIn() && next.originalPath !== '/admin/login') {
                     $location.path('/admin/login');
                 }
+
+                if (AdminAuthService.isLoggedIn() && next.originalPath === '/admin/login') {
+                    $location.path('/admin');
+                }
+
             });
 
 

@@ -3,33 +3,48 @@
 # ~~~~
 
 # Home page
-GET        /                                       controllers.Application.index
-GET        /admin                                  controllers.admin.AdminApplication.adminIndex
+GET         /                                             controllers.Application.index
+GET         /admin                                        controllers.admin.AdminApplication.adminIndex
+GET         /admin/                                       controllers.admin.AdminApplication.adminIndex
 
-GET        /blocks/*file                           controllers.BlockController.block(file)
-GET        /pages/*file                            controllers.PageController.page(file)
-GET        /images/*file                           controllers.ImageController.image(file)
+GET         /blocks/*file                                 controllers.BlockController.block(file)
+GET         /pages/*file                                  controllers.PageController.page(file)
+GET         /images/*file                                 controllers.ImageController.image(file)
 
-GET        /api/v1/products                        controllers.api.ProductsAPI.index
-GET        /api/v1/products/:id                    controllers.api.ProductsAPI.show(id)
+GET         /common/blocks/category/default.html          controllers.BlockController.categoryDefault
+GET         /common/blocks/category/tree_item.html        controllers.BlockController.treeItem
 
-GET        /api/v1/categories                      controllers.api.CategoriesAPI.index
-GET        /api/v1/categories/:id                  controllers.api.CategoriesAPI.show(id)
 
-GET        /api/v1/pages/*fileName                 controllers.api.PagesAPI.showFile(fileName)
+GET         /api/v1/products                              controllers.api.ProductsAPI.index
+GET         /api/v1/products/:id                          controllers.api.ProductsAPI.show(id)
+
+GET         /api/v1/categories                            controllers.api.CategoriesAPI.index
+GET         /api/v1/categories/tree                       controllers.api.CategoriesAPI.tree
+GET         /api/v1/categories/:id                        controllers.api.CategoriesAPI.show(id)
+
+GET         /api/v1/pages/*fileName                       controllers.api.PagesAPI.showFile(fileName)
+
+POST        /api/v1/members/login                         controllers.api.MembersAPI.login
 
 
 # Admin App
-GET        /admin/pages/login.html                 controllers.admin.AdminPageController.login
-GET        /admin/pages/dashboard.html             controllers.admin.AdminPageController.dashboard
-GET        /admin/pages/products/index.html        controllers.admin.AdminPageController.productsIndex
-GET        /admin/blocks/header.html               controllers.admin.AdminBlockController.header
-GET        /admin/blocks/footer.html               controllers.admin.AdminBlockController.footer
-GET        /admin/blocks/product/list.html         controllers.admin.AdminBlockController.productList
+GET         /admin/pages/login.html                       controllers.admin.AdminPageController.login
+GET         /admin/pages/dashboard.html                   controllers.admin.AdminPageController.dashboard
+GET         /admin/pages/products/index.html              controllers.admin.AdminPageController.productsIndex
+GET         /admin/pages/products/product.html            controllers.admin.AdminPageController.productRegistration
+GET         /admin/pages/products/category.html           controllers.admin.AdminPageController.categoryRegistration
+GET         /admin/blocks/header.html                     controllers.admin.AdminBlockController.header
+GET         /admin/blocks/footer.html                     controllers.admin.AdminBlockController.footer
+GET         /admin/blocks/product/list.html               controllers.admin.AdminBlockController.productList
+GET         /admin/blocks/product/table_item.html         controllers.admin.AdminBlockController.tableItem
 
 
 # Map static resources from the /public folder to the /assets URL path
-GET        /assets/*file                           controllers.Assets.versioned(path="/public",  file: Asset)
+GET         /assets/*file                                 controllers.Assets.versioned(path="/public",  file: Asset)
 
-GET        /admin/*path                            controllers.admin.AdminApplication.all(path)
-GET        /*path                                  controllers.Application.all(path)
+GET         /admin/*path                                  controllers.admin.AdminApplication.all(path)
+GET         /admin/*path/                                 controllers.admin.AdminApplication.unTrail(path)
+
+GET         /*path                                        controllers.Application.all(path)
+GET         /*path/                                       controllers.Application.unTrail(path)
+

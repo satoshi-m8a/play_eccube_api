@@ -6,7 +6,8 @@
             bootstrap: '../lib/bootstrap/js/bootstrap',
             angular: '../lib/angularjs/angular',
             'angular-route': '../lib/angularjs/angular-route',
-            'angular-resource': '../lib/angularjs/angular-resource'
+            'angular-resource': '../lib/angularjs/angular-resource',
+            'angular-cookies': '../lib/angularjs/angular-cookies'
         },
         shim: {
             jquery: {
@@ -20,11 +21,12 @@
                 exports: 'angular'
             },
             'angular-route': ['angular'],
-            'angular-resource': ['angular']
+            'angular-resource': ['angular'],
+            'angular-cookies': ['angular']
         }
     });
 
-    require(['angular', 'angular-route', 'angular-resource', 'jquery', 'bootstrap', './app_admin'], function (angular) {
+    require(['angular', 'angular-route', 'angular-resource', 'angular-cookies', 'jquery', 'bootstrap', './app_admin'], function (angular) {
         angular.bootstrap(document, ['ec3']);
     });
 

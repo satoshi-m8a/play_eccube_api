@@ -12,5 +12,9 @@ object AdminApplication extends Controller {
     Ok(views.html.admin.index())
   }
 
+  def unTrail(path: String) = Action {
+    println(path)
+    MovedPermanently("/admin/" + path)
+  }
 
 }

@@ -2,6 +2,12 @@
 
 @icon-font-path: "../lib/bootstrap/fonts/";
 
+@-moz-document url-prefix() {
+  fieldset {
+    display: table-cell;
+  }
+}
+
 [ng-cloak] {
   display: none;
 }
@@ -16,15 +22,43 @@ footer {
 }
 
 .sidebar {
-  position: fixed;
-  top: @navbar-height;
-  bottom: 0;
-  left: 0;
-  z-index: 1000;
-  display: block;
-  padding: 20px;
-  overflow-x: hidden;
-  overflow-y: auto; /* Scrollable contents if viewport is shorter than content. */
   background-color: #f5f5f5;
+  padding: 20px;
+}
+
+@media (min-width: 768px) {
+
+  .sidebar {
+    position: fixed;
+    top: @navbar-height;
+    bottom: 0;
+    left: 0;
+    z-index: 1000;
+    display: block;
+    overflow-x: hidden;
+    overflow-y: auto;
+    border-right: 1px solid #eee;
+  }
+
+}
+
+#category_tree {
+  -webkit-touch-callout: none;
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
+
   border-right: 1px solid #eee;
+
+  li {
+    list-style: none;
+    line-height: 25px;
+  }
+
+  .active {
+    background-color: @component-active-bg;
+    color: @list-group-active-color;
+  }
 }

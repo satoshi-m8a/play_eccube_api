@@ -5,15 +5,59 @@ import anorm._
 import play.api.db.DB
 import play.api.Play.current
 
-case class Product(id: Long, name: String, mainComment: String, mainImage: String)
+case class Product(id: Long,
+                   name: String,
+                   mainComment: String,
+                   mainImage: String,
+                   mainLargeImage: String,
+                   mainListImage: String,
+                   price01Min: Option[Long],
+                   price01Max: Option[Long],
+                   price02Min: Option[Long],
+                   price02Max: Option[Long],
+                   stockMin: Option[Long],
+                   stockMax: Option[Long]
+                    )
 
 object Product {
+
+  import AnormConversions._
+
   val parser: RowParser[Product] = {
     get[Long]("product_id") ~
       get[String]("name") ~
       get[String]("main_comment") ~
-      get[String]("main_image") map {
-      case id ~ name ~ mainComment ~ mainImage => Product(id, name, mainComment, mainImage)
+      get[String]("main_image") ~
+      get[String]("main_large_image") ~
+      get[String]("main_list_image") ~
+      get[Option[Long]]("price01_min") ~
+      get[Option[Long]]("price01_max") ~
+      get[Option[Long]]("price02_min") ~
+      get[Option[Long]]("price02_max") ~
+      get[Option[Long]]("stock_min") ~
+      get[Option[Long]]("stock_max") map {
+      case id ~
+        name ~
+        mainComment ~
+        mainImage ~
+        mainLargeImage ~
+        mainListImage ~
+        price01Min ~
+        price01Max ~
+        price02Min ~
+        price02Max ~
+        stockMin ~
+        stockMax => Product(id,
+        name,
+        mainComment,
+        mainImage,
+        mainLargeImage,
+        mainListImage,
+        price01Min,
+        price01Max,
+        price02Min,
+        price02Max,
+        stockMin, stockMax)
     }
   }
 }
