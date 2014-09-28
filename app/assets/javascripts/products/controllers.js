@@ -17,9 +17,22 @@ define([], function () {
     };
     DetailCtrl.$inject = ['$scope', '$rootScope', '$routeParams', 'product'];
 
+    var ProductSearchCtrl = function ($scope, $rootScope, $routeParams, ProductSearch) {
+        $rootScope.pageTitle = 'Search Results';
+        $rootScope.hasHeader = true;
+        $rootScope.hasFooter = true;
+
+        $scope.searchWord = $routeParams.query;
+        ProductSearch.search($scope.searchWord).success(function (data) {
+            $scope.products = data;
+        });
+    };
+    ProductSearchCtrl.$inject = ['$scope', '$rootScope', '$routeParams', 'ProductSearch'];
+
     return {
         ProductListCtrl: ProductListCtrl,
-        DetailCtrl: DetailCtrl
+        DetailCtrl: DetailCtrl,
+        ProductSearchCtrl: ProductSearchCtrl
     };
 
 });

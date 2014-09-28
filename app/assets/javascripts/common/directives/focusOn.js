@@ -7,8 +7,10 @@ define(['angular'], function (angular) {
                 restrict: 'A',
                 link: function (scope, elem, attrs) {
                     scope.$on(attrs.focusOn, function (e) {
-                        elem[0].focus();
-                        elem.select();
+                        setTimeout(function () {
+                            elem[0].focus();
+                            elem.select();
+                        }, 1);
                     });
                 }
             };

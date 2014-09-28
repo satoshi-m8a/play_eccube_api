@@ -1,9 +1,11 @@
 package controllers.api
 
 import controllers.AuthActionComposition
+import controllers.search.Application._
 import models.{Image, Product}
 import play.api.libs.json.{Json, Writes}
 import play.api.mvc._
+import services.ElasticsearchServer
 
 import scala.util.control.Exception._
 
@@ -97,6 +99,43 @@ trait ProductsAPI extends Pagination with AuthActionComposition {
         product <- Products.findById(id)
       } yield {
         Ok(Json.toJson(product))
+      }).getOrElse(Forbidden)
+  }
+
+  def search = Action {
+    request =>
+      (for {
+        query <- request.getQueryString("query")
+      } yield {
+        val response = ElasticsearchServer.search(query)
+
+        import collection.JavaConversions._
+
+        val products = response.getHits.getHits.map(hit => {
+          val src = hit.getSource.toMap
+
+
+          //          println(allCatch.opt(Integer.parseInt(src.getOrElse[String]("price01_min", "").toLong))
+
+
+          Product(
+            src.getOrElse("product_id", 0L).asInstanceOf[Int].toLong,
+            src.getOrElse("name", "").asInstanceOf[String],
+            src.getOrElse("main_comment", "").asInstanceOf[String],
+            src.getOrElse("main_image", "").asInstanceOf[String],
+            src.getOrElse("main_large_image", "").asInstanceOf[String],
+            src.getOrElse("main_list_image", "").asInstanceOf[String],
+            allCatch.opt(Integer.parseInt(src.getOrElse("price01_min", "").asInstanceOf[String]).toLong),
+            allCatch.opt(Integer.parseInt(src.getOrElse("price01_max", "").asInstanceOf[String]).toLong),
+            allCatch.opt(Integer.parseInt(src.getOrElse("price02_min", "").asInstanceOf[String]).toLong),
+            allCatch.opt(Integer.parseInt(src.getOrElse("price02_max", "").asInstanceOf[String]).toLong),
+            allCatch.opt(Integer.parseInt(src.getOrElse("stock_min", "").asInstanceOf[String]).toLong),
+            allCatch.opt(Integer.parseInt(src.getOrElse("stock_max", "").asInstanceOf[String]).toLong)
+          )
+        })
+
+        import ProductJsonFormatForUser._
+        Ok(Json.toJson(products))
       }).getOrElse(Forbidden)
   }
 

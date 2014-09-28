@@ -2,7 +2,15 @@ name := """play_eccube_api"""
 
 version := "1.0-SNAPSHOT"
 
-lazy val root = (project in file(".")).enablePlugins(PlayScala)
+
+lazy val search = project.in(file("modules/search")).enablePlugins(PlayScala)
+
+lazy val root =
+  project.in(file("."))
+    .enablePlugins(PlayScala)
+    .aggregate(search)
+    .dependsOn(search)
+
 
 scalaVersion := "2.11.1"
 
@@ -28,6 +36,10 @@ RjsKeys.modules := Seq(
   WebJs.JS.Object("name" -> "main"),
   WebJs.JS.Object("name" -> "main_admin")
 )
+
+
+
+
 
 scalacOptions in ThisBuild ++= Seq(
   "-encoding", "UTF-8",

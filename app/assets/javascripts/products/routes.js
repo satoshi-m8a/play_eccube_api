@@ -13,6 +13,15 @@ define(['angular', './controllers', 'common/main'], function (angular, controlle
                         }]
                     }
                 })
+                .when('/products/search', {
+                    templateUrl: '/pages/products/search.html',
+                    controller: controllers.ProductSearchCtrl,
+                    resolve: {
+                        products: ['Product', function (Products) {
+                            return Products.query().$promise;
+                        }]
+                    }
+                })
                 .when('/products/:productId', {
                     templateUrl: '/pages/products/detail.html',
                     controller: controllers.DetailCtrl,

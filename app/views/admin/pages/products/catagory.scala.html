@@ -13,18 +13,28 @@
                 </ul>
             </div>
             <div class="col-sm-8">
-                <h3>{{selectedCategory.name}}</h3>
+                <form class="form-inline" role="form" ng-submit="updateCategoryName()">
+                    <div class="form-group" ng-class="{'has-error':hasSameName()||!hasInput()}">
+                        <h3 ng-hide="editing && selectedCategory.id>0" ng-dblclick="edit()">{{selectedCategory.name}}</h3>
+                        <input type="text" class="form-control" placeholder="カテゴリ名" ng-show="editing" ng-model="editedCategoryName" focus-on="onEditStart">
+                        <span class="help-block" ng-show="hasSameName()">同じ階層に同名のカテゴリ名が存在しています。</span>
+                        <span class="help-block" ng-show="!hasInput()">カテゴリ名は一文字以上の入力が必要です。</span>
+                    </div>
+                    <button type="button" class="btn btn-default pull-right" ng-hide="editing || selectedCategory.id<1" ng-click="edit()">名前を編集</button>
+                    <button type="submit" class="btn btn-default pull-right" ng-show="editing" ng-disabled="!submitEnabled()" disabled>登録</button>
+                </form>
+
                 <hr>
                 <form class="form-horizontal" role="form">
                     <div class="form-group">
                         <label for="inputCategoryName" class="col-sm-3 control-label">カテゴリを追加</label>
                         <div class="col-sm-9">
-                            <input type="text" class="form-control" id="inputCategoryName" placeholder="追加するカテゴリ名">
+                            <input type="text" ng-model="categoryName" class="form-control" id="inputCategoryName" placeholder="追加するカテゴリ名">
                         </div>
                     </div>
                     <div class="form-group">
                         <div class="col-sm-offset-10 col-sm-2">
-                            <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-plus"></span>
+                            <button type="submit" class="btn btn-default" ng-disabled="!addEnabled()" ng-click="addCategory(categoryName)" ><span class="glyphicon glyphicon-plus"></span>
                                 追加 </button>
                         </div>
                     </div>
@@ -32,9 +42,23 @@
 
                 <div class="table-responsive">
                     <table class="table table-striped table-bordered table-hover">
+                        <thead>
+                            <tr>
+                                <td class="col-md-9"></td>
+                                <td class="col-md-2">移動</td>
+                                <td class="col-md-1">削除</td>
+                            </tr>
+                        </thead>
                         <tbody>
-                            <tr ng-repeat="child in children">
-                                <td>{{child.name}}</td>
+                            <tr ng-repeat="child in children | orderBy:'rank':true">
+                                <td class="col-md-9">{{child.name}}{{child.rank}}</td>
+                                <td class="col-md-2">
+                                    <button class="btn" ng-if="children[$index-1]" ng-click="up(child,children[$index-1])"><span class="glyphicon glyphicon-arrow-up" ></span></button>
+                                    <button class="btn" ng-if="!children[$index-1]" disabled><span class="glyphicon glyphicon-minus"></span></button>
+                                    <button class="btn" ng-if="children[$index+1]" ng-click="down(child,children[$index+1])"><span class="glyphicon glyphicon-arrow-down"></span></button>
+                                    <button class="btn" ng-if="!children[$index+1]" disabled><span class="glyphicon glyphicon-minus"></span></button>
+                                </td>
+                                <td class="col-md-1"><button class="btn" ng-click="remove(child)"><span class="glyphicon glyphicon-remove"></span></button></td>
                             </tr>
                         </tbody>
                     </table>

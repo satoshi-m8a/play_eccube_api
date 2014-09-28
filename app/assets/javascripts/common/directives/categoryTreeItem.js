@@ -15,7 +15,7 @@ define(['angular'], function (angular) {
                     return base + '/blocks/category/' + blockName + '.html';
                 },
                 link: function (scope, element, attrs) {
-                    element.append($compile('<ul><ec3-category-tree-item ng-repeat="child in category.children" category="child"></ec3-category-tree-item></ul>')(scope));
+                    element.append($compile('<ul><ec3-category-tree-item ng-repeat="child in category.children | orderBy:\'rank\':true" category="child"></ec3-category-tree-item></ul>')(scope));
                     scope.selectCategoryItem = function (category) {
                         if (scope.$parent.selectCategoryItem) {
                             scope.$parent.selectCategoryItem(category);
@@ -23,7 +23,6 @@ define(['angular'], function (angular) {
                     };
 
                     scope.$on('selectCategoryItem', function (event, selectedCategory) {
-                        console.log(selectedCategory);
                         scope.category.selected = selectedCategory.id === scope.category.id;
                     });
                 }

@@ -12,6 +12,7 @@ define(['angular',
         './resources/products',
         './resources/pages',
         './services/pages',
+        './services/productSearch',
         './services/auth',
         './services/session'
     ],
@@ -31,6 +32,7 @@ define(['angular',
             'common.resources.products',
             'common.resources.pages',
             'common.services.pages',
+            'common.services.productSearch',
             'common.services.auth',
             'common.services.session'
         ]);

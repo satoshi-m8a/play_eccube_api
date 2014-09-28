@@ -22,11 +22,11 @@
                 <label for="inputProductName" class="col-sm-2 control-label">カテゴリ</label>
                 <div class="col-sm-4">
                     <select multiple class="form-control" id="selectCategory">
-                        <option>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
+                        <option selected>1</option>
+                        <option selected>2</option>
+                        <option selected>3</option>
+                        <option selected>4</option>
+                        <option selected>5</option>
                     </select>
                 </div>
                 <div class="col-sm-2">
@@ -35,11 +35,7 @@
                 </div>
                 <div class="col-sm-4">
                     <select multiple class="form-control" id="selectCategorySource">
-                        <option selected>1</option>
-                        <option>2</option>
-                        <option>3</option>
-                        <option>4</option>
-                        <option>5</option>
+                        <option ng-repeat="category in categories" ng-selected="$index==0">{{category.breadcrumbs}}</option>
                     </select>
                 </div>
             </div>
