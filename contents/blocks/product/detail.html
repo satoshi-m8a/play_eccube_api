@@ -1,7 +1,17 @@
-<div>
-    <h2>{{product.name}}</h2>
-    <h3>{{id}}</h3>
-    <img ng-src="{{product.mainLargeImage.url}}" alt="{{product.name}}" class="img-responsive"/>
+<div class="row">
+    <div class="col-md-6">
+        <h1></h1>
+        <img ng-src="{{product.mainLargeImage.url}}" alt="{{product.name}}" class="img-responsive"/>
+    </div>
+    <div class="col-md-6">
+        <h2>{{product.name}}</h2>
 
-    <p>{{product.mainComment}}</p>
+        <h3>{{id}}</h3>
+
+        <p>{{product.mainComment}}</p>
+
+        <form role="form">
+            <button type="submit" class="btn btn-default"><span class="glyphicon glyphicon-shopping-cart"></span> ADD TO CART</button>
+        </form>
+    </div>
 </div>

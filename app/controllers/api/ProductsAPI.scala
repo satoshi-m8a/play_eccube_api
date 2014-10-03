@@ -102,6 +102,18 @@ trait ProductsAPI extends Pagination with AuthActionComposition {
       }).getOrElse(Forbidden)
   }
 
+  def preSearch = Action {
+    request =>
+      val hits = (for {
+        query <- request.getQueryString("query")
+      } yield {
+        val response = ElasticsearchServer.search(query)
+        response.getHits.getTotalHits
+      }).getOrElse(0L)
+
+      Ok(Json.toJson(Map("hits" -> hits)))
+  }
+
   def search = Action {
     request =>
       (for {
@@ -113,11 +125,6 @@ trait ProductsAPI extends Pagination with AuthActionComposition {
 
         val products = response.getHits.getHits.map(hit => {
           val src = hit.getSource.toMap
-
-
-          //          println(allCatch.opt(Integer.parseInt(src.getOrElse[String]("price01_min", "").toLong))
-
-
           Product(
             src.getOrElse("product_id", 0L).asInstanceOf[Int].toLong,
             src.getOrElse("name", "").asInstanceOf[String],

@@ -1,5 +1,6 @@
 package services
 
+import org.elasticsearch.action.search.SearchType
 import org.elasticsearch.client.Requests
 import org.elasticsearch.common.settings.ImmutableSettings._
 import org.elasticsearch.env.Environment
@@ -16,7 +17,7 @@ trait ElasticsearchServer {
     .put("path.data", dataDir)
     .put("path.plugins", pluginDir)
     .put("index.number_of_replicas", 0)
-    .put("index.number_of_shards", 1)
+    .put("index.number_of_shards", 3)
 
   lazy val node = {
     val ev = new Environment(settings.build())
@@ -130,63 +131,45 @@ trait ElasticsearchServer {
             |    ON dtb_products.maker_id = dtb_maker.maker_id
           """.stripMargin,
         "index" -> "products",
-        "schedule" -> "*/1 * * * * ?", //TODO
+        "schedule" -> "*/30 * * * * ?", //TODO
         "index_settings" -> JSONObject(Map(
-          "analysis" -> JSONObject(Map(
-            "tokenizer" -> JSONObject(Map(
-              "ngram_ja_tokenizer" -> JSONObject(Map(
-                "type" -> "nGram",
-                "min_gram" -> "2",
-                "max_gram" -> "3",
-                "token_chars" -> JSONArray(List("letter", "digit"))
-              ))
-            )),
-            "analyzer" -> JSONObject(Map(
-              "default" -> JSONObject(Map(
-                "type" -> "custom",
-                "tokenizer" -> "ngram_ja_tokenizer"
-              ))
-            ))
-          ))
-        ))
-        /*
-          "index_settings" -> JSONObject(Map(
-            "analysis" -> JSONObject(Map(
+          "analysis" -> JSONObject(
+            Map(
               "filter" -> JSONObject(Map(
-                "greek_lowercase_filter" -> JSONObject(Map(
-                  "type" -> "lowercase",
-                  "language" -> "greek"
+                "katakana_stemmer" -> JSONObject(Map(
+                  "type" -> "kuromoji_stemmer",
+                  "minimum_length" -> "4"
+                ))
+              )),
+              "tokenizer" -> JSONObject(Map(
+                "ja_tokenizer" -> JSONObject(Map(
+                  "type" -> "kuromoji_tokenizer",
+                  "mode" -> "search"
                 ))
               )),
               "analyzer" -> JSONObject(Map(
                 "default" -> JSONObject(Map(
                   "type" -> "custom",
-                  "tokenizer" -> "edge_ngram_tokenizer",
-                  "filter" -> JSONArray(List("greek_lowercase_filter"))
-                ))
-              )),
-              "tokenizer" -> JSONObject(Map(
-                "edge_ngram_tokenizer" -> JSONObject(Map(
-                  "type" -> "edgeNGram",
-                  "min_gram" -> "1",
-                  "max_gram" -> "20",
-                  "token_chars" -> JSONArray(List("letter", "digit"))
+                  "tokenizer" -> "ja_tokenizer",
+                  "char_filter" -> JSONArray(List("html_strip", "kuromoji_iteration_mark")),
+                  "filter" -> JSONArray(List("lowercase", "cjk_width", "kuromoji_baseform", "katakana_stemmer", "kuromoji_part_of_speech"))
                 ))
               ))
-            ))
-          ))
-          */
+            )
+          )
+        ))
       ))
     ))
   }
 
-  def search(word: String) = {
-    val response =
-      client.prepareSearch("products")
+  def search(query: String) = {
+    val res = client.prepareSearch("products")
+      .setQuery( QueryBuilders.fuzzyLikeThisQuery("name","comment3","main_comment","main_list_comment").likeText(query).analyzer("default"))
+      .execute().actionGet()
 
-        .setQuery(QueryBuilders.queryString(word).defaultField("name").field("comment3").field("main_comment").field("main_list_comment"))
-        .execute().actionGet()
-    response
+    println(res)
+
+    res
   }
 }
 

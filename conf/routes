@@ -17,6 +17,7 @@ GET           /common/blocks/category/tree_item.html        controllers.BlockCon
 
 GET           /api/v1/products                              controllers.api.ProductsAPI.index
 GET           /api/v1/products/search                       controllers.api.ProductsAPI.search
+GET           /api/v1/products/pre_search                   controllers.api.ProductsAPI.preSearch
 GET           /api/v1/products/:id                          controllers.api.ProductsAPI.show(id)
 
 GET           /api/v1/categories                            controllers.api.CategoriesAPI.index

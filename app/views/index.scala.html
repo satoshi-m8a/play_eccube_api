@@ -3,7 +3,7 @@
     @*-- Header -- *@
     <ec3-header ng-if="hasHeader"></ec3-header>
     @* -- Main Content -- *@
-    <div class="container" ng-if="!errorTemplateUrl" ng-view></div>
+    <div ng-if="!errorTemplateUrl" ng-view></div>
     <div ng-if="errorTemplateUrl" ng-include="errorTemplateUrl"></div>
     @*-- Footer -- *@
     <ec3-footer ng-if="hasFooter"></ec3-footer>

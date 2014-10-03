@@ -28,6 +28,7 @@
 
     require(['angular', 'angular-route', 'angular-resource', 'angular-cookies', 'jquery', 'bootstrap', './app'], function (angular) {
         angular.bootstrap(document, ['ec3']);
+
     });
 
 })(requirejs);

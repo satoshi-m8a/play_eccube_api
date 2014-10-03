@@ -13,3 +13,8 @@ dist
 /.project
 /RUNNING_PID
 /.settings
+node_modules
+bower_components
+
+esdata
+esplugin

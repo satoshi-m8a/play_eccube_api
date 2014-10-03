@@ -1,0 +1,22 @@
+{
+    "name": "play_eccube_api",
+    "description": "front app for play eccube api",
+    "version": "0.2.0",
+    "homepage": "https://github.com/satoshi-m8a/play_eccube_api",
+    "license": "MIT",
+    "ignore": [
+        "**/.*",
+        "node_modules",
+        "bower_components",
+        "test",
+        "tests"
+    ],
+    "dependencies": {
+        "angular": "~1.2.1",
+        "angular-route": "~1.2.1",
+        "angular-scenario": "~1.2.1",
+        "angular-mocks": "~1.2.1",
+        "requirejs": "~2.1.9",
+        "requirejs-text": "~2.0.10"
+    }
+}

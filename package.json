@@ -1,0 +1,35 @@
+{
+  "name": "play_eccube_api",
+  "version": "0.0.0",
+  "description": "EC-CUBEのDBにアクセスできる、APIサーバーをPlayFramework2(Scala)を使って作っています。",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "devDependencies": {
+    "karma": ">=0.10.4",
+    "karma-chrome-launcher": "~0.1.0",
+    "karma-coffee-preprocessor": "~0.2.0",
+    "karma-firefox-launcher": "~0.1.0",
+    "karma-html2js-preprocessor": "~0.1.0",
+    "karma-jasmine": "~0.1.3",
+    "karma-junit-reporter": "^0.2.2",
+    "karma-ng-scenario": "~0.1.0",
+    "karma-phantomjs-launcher": "~0.1.0",
+    "karma-requirejs": "~0.2.0",
+    "karma-script-launcher": "~0.1.0"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/satoshi-m8a/play_eccube_api.git"
+  },
+  "author": "",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/satoshi-m8a/play_eccube_api/issues"
+  },
+  "homepage": "https://github.com/satoshi-m8a/play_eccube_api"
+}

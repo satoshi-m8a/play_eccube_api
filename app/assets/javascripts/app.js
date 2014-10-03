@@ -1,7 +1,7 @@
-define(['angular', './top/main', './products/main', './page/main'], function (angular) {
+define(['angular', './top/main', './products/main', './mypage/main', './page/main'], function (angular) {
     'use strict';
 
-    return angular.module('ec3', ['ec3.top', 'ec3.products', 'ec3.page'])
+    return angular.module('ec3', ['ec3.top', 'ec3.products', 'ec3.mypage', 'ec3.page'])
         .config(['$locationProvider', '$routeProvider', function ($locationProvider, $routeProvider) {
             $locationProvider.html5Mode(true);
             $routeProvider.otherwise({ templateUrl: '/pages/404.html' });

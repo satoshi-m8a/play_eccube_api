@@ -13,10 +13,9 @@
 
         <div class="collapse navbar-collapse" id="navbar-collapse">
             <ul class="nav navbar-nav">
-                <li class="active"><a href="/products">Products</a></li>
-                <li><a href="#">Link</a></li>
+                <li><a href="/products">Products</a></li>
                 <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
+                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Pages <span class="caret"></span></a>
                     <ul class="dropdown-menu" role="menu">
                         <li><a href="/info">Info</a></li>
                         <li><a href="/another">Another action</a></li>
@@ -30,24 +29,22 @@
                 </li>
             </ul>
             <ul class="nav navbar-nav navbar-right">
+                <li><a href="/mypage/login">
+                    <span class="glyphicon glyphicon-user"></span> MyPage</a>
+                </li>
+                <li><a href="/cart">
+                    <span class="glyphicon glyphicon-shopping-cart"></span> Cart</a>
+                </li>
                 <li>
                     <form class="navbar-form" role="search" ng-submit="searchProduct(searchWord)">
                         <div class="input-group form-group">
                             <div class="input-group-addon"><span class="glyphicon glyphicon-search"></span></div>
-                            <input type="text" class="form-control" placeholder="Search" ng-model="searchWord">
+                            <input type="text" class="form-control" placeholder="Search" ng-model="searchWord"
+                                   ng-keyup="preSearchProduct(searchWord)">
                         </div>
-                        <button type="submit" class="btn btn-default">Search</button>
+                        <button type="submit" class="btn btn-default">Search <span ng-if="hits>0">Hits:{{hits}}</span>
+                        </button>
                     </form>
-                </li>
-                <li class="dropdown">
-                    <a href="#" class="dropdown-toggle" data-toggle="dropdown">Dropdown <span class="caret"></span></a>
-                    <ul class="dropdown-menu" role="menu">
-                        <li><a href="/admin">Admin</a></li>
-                        <li><a href="#">Another action</a></li>
-                        <li><a href="#">Something else here</a></li>
-                        <li class="divider"></li>
-                        <li><a href="#">Separated link</a></li>
-                    </ul>
                 </li>
             </ul>
 
